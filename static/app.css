@@ -1,0 +1,11 @@
+/*Alignment*/
+.vertical-center {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
+.vh-85{
+    height: 85vh!important;
+}
