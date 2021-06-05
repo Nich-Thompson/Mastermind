@@ -28,10 +28,25 @@ def login():
 @app.route('/settings')
 def settings():
     if request.method == "POST":
-        return redirect(url_for('settings'))
-    
+        req = request.form
+        double_color = req.get('doubleColor')
+        color_amount = req.get('colorAmount')
+        position_amount = req.get('positionAmount')
+        return redirect(url_for('game'))
+
     return render_template(
         "settings.html",
+        nav=getNavItems(),
+    )
+
+@app.route('/game')
+def game():
+    if request.method == "POST":
+        req = request.form
+        return redirect(url_for(''))
+
+    return render_template(
+        'game.html',
         nav=getNavItems(),
     )
 
