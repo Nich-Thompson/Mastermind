@@ -65,6 +65,8 @@ def button():
     if request.method == "POST":
         return render_template(
             'game.html',
+            nav=get_nav_items(),
+            title='Mastermind - Game',
         )
 
 

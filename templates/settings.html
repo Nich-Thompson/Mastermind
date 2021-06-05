@@ -11,16 +11,20 @@
             <form action="/settings" method="POST">
 
                 <div class="form-group">
-                    <label>Sta dubbele kleuren toe</label>
-                    <input type="checkbox" class="" id="double_color" name="double_color">
+                    <label>Sta dubbele kleuren toe: </label>
+                    <input type="checkbox" class="" id="double_color" name="double_color" checked>
                 </div>
                 <div class="form-group">
-                    <label>Aantal kleuren</label>
-                    <input type="number" class="" id="color_amount" name="color_amount" required>
+                    <label>Aantal kleuren: </label>
+                    <input type="number" class="" id="color_amount" name="color_amount" placeholder="6-10" min="6" max="10" required>
                 </div>
                 <div class="form-group">
-                    <label>Aantal posities</label>
-                    <input type="number" class="" id="position_amount" name="position_amount" required>
+                    <label>Aantal posities in de breedte: </label>
+                    <input type="number" class="" id="position_width" name="position_amount" placeholder="3-6" min="3" max="6" required>
+                </div>
+                <div class="form-group">
+                    <label>Aantal posities in de hoogte: </label>
+                    <input type="number" class="" id="position_height" name="position_amount" placeholder="6-14" min="6" max="14" required>
                 </div>
 
                 <button type="submit" class="btn btn-primary mt-3">Spel starten</button>
