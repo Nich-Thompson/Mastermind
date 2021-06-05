@@ -90,6 +90,8 @@ def create_app(test_config=None):
         if request.method == "POST":
             return render_template(
                 'game.html',
+                nav=get_nav_items(),
+                title='Mastermind - Game',
             )
     return app
 
