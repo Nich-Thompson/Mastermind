@@ -1,8 +1,9 @@
-from flask import Flask, url_for
+from flask import Flask, url_for, session
 from flask import render_template
 from flask import request, redirect
 
 app = Flask(__name__)
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 
 def get_nav_items():
@@ -19,7 +20,7 @@ def get_nav_items():
 def login():
     if request.method == "POST":
         req = request.form
-        username = req.get("username")
+        session['username'] = req.get("username")
         return redirect(url_for('settings'))
 
     return render_template(
@@ -33,9 +34,9 @@ def login():
 def settings():
     if request.method == "POST":
         req = request.form
-        double_color = req.get('double_color')
-        color_amount = req.get('color_amount')
-        position_amount = req.get('position_amount')
+        session['double_color'] = req.get('double_color')
+        session['color_amount'] = req.get('color_amount')
+        session['position_amount'] = req.get('position_amount')
         return redirect(url_for('game'))
 
     return render_template(
