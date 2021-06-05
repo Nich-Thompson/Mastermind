@@ -22,10 +22,11 @@ def login():
 
     return render_template(
         "login.html",
-        nav=getNavItems()
+        nav=getNavItems(),
+        title='Mastermind - Log In',
     )
 
-@app.route('/settings')
+@app.route('/settings', methods=["GET", "POST"])
 def settings():
     if request.method == "POST":
         req = request.form
@@ -37,9 +38,10 @@ def settings():
     return render_template(
         "settings.html",
         nav=getNavItems(),
+        title='Mastermind - Settings',
     )
 
-@app.route('/game')
+@app.route('/game', methods=["GET", "POST"])
 def game():
     if request.method == "POST":
         req = request.form
@@ -48,6 +50,7 @@ def game():
     return render_template(
         'game.html',
         nav=getNavItems(),
+        title='Mastermind - Game',
     )
 
 if __name__ == '__main__':
