@@ -32,6 +32,7 @@ def create_app(test_config=None):
 
     @app.route('/', methods=["GET", "POST"])
     def login():
+        session.clear()
         if request.method == "POST":
             req = request.form
             username = req.get("username")
@@ -42,31 +43,64 @@ def create_app(test_config=None):
             )
             db.commit()
             user = db.execute(
-                'SELECT * FROM user WHERE username = ?', (username,)
+                'SELECT * FROM user ORDER BY id DESC lIMIT(1)'
             ).fetchone()
-            session.clear()
             session['user_id'] = user['id']
-            return redirect(url_for('settings', username=user['username']))
-        nav = [
-            {"name": "Homepage", "url": url_for('login')},
-            {"name": "Statistieken", "url": '/'},
-            {"name": "Over ons", "url": '/'}
-            # {"name": "Statistieken", "url": url_for('statistics')},
-            # {"name": "Over ons", "url": url_for('about_us')},
-        ]
+            return redirect(url_for('settings'))
+        nav = get_nav_items()
         return render_template(
             "login.html",
             nav=nav
         )
 
-    @app.route('/settings/<username>')
-    def settings(username):
+    @app.route('/settings', methods=["GET", "POST"])
+    def settings():
+        if session.get('user_id') is None:
+            return redirect(url_for('login'))
+        if request.method == "POST":
+            req = request.form
+            session['double_color'] = req.get('double_color')
+            session['color_amount'] = req.get('color_amount')
+            session['position_width'] = req.get('position_width')
+            session['position_height'] = req.get('position_height')
+            return redirect(url_for('game'))
+
         return render_template(
             "settings.html",
-            username=username
+            nav=get_nav_items(),
+            title='Mastermind - Settings',
         )
 
+    @app.route('/game', methods=["GET", "POST"])
+    def game():
+        if session.get('user_id') is None:
+            return redirect(url_for('login'))
+        if request.method == "POST":
+            req = request.form
+            return redirect(url_for(''))
+
+        return render_template(
+            'game.html',
+            nav=get_nav_items(),
+            title='Mastermind - Game',
+        )
+
+    @app.route('/select_color', methods=["GET", "POST"])
+    def button():
+        if request.method == "POST":
+            return render_template(
+                'game.html',
+            )
     return app
+
+def get_nav_items():
+    return [
+        {"name": "Homepage", "url": url_for('login')},
+        {"name": "Statistieken", "url": '/'},
+        {"name": "Over ons", "url": '/'}
+        # {"name": "Statistieken", "url": url_for('statistics')},
+        # {"name": "Over ons", "url": url_for('about_us')},
+    ]
 
 if __name__ == '__main__':
     app = create_app()
