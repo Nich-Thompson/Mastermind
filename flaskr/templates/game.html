@@ -9,8 +9,14 @@
     <div class="row mt-4">
         <div class="col-md-6 border border-1 rounded board">
             <div class="container p-3 border border-1 rounded mb-4 vertical-center upper_board">
-                {% for position in range(session.get('position_width') | int) %}
-                    a
+                {% for position_width in range(session.get('position_width') | int) %}
+                <div class="border border-1 rounded pin_column">
+                    {% for position_height in range(session.get('position_height') | int) %}
+                    <div class="pin_box" id="{{ position_width }}-{{ position_height }}">
+                        O
+                    </div>
+                    {% endfor %}
+                </div>
                 {% endfor %}
             </div>
             <div class="container row board_under">

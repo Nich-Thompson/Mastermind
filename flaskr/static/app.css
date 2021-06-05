@@ -32,3 +32,13 @@
     width: 20vw;
     background-color: LightSteelBlue;
 }
+
+.pin_column {
+    margin-left: .5rem;
+    margin-right: .5rem;
+}
+
+.pin_box {
+    width: 2rem;
+    height: 2rem;
+}
