@@ -9,7 +9,14 @@
     <div class="row vh-85 mt-4 vertical-center">
         <div class="col-md-6 p-3 border border-1 rounded">
 
-            <h1>Mastermind</h1>
+            <h1>Mastermind: {{ session['color_amount'] }}</h1>
+
+            <div class="container">
+                <h2>Button pressed: {{ button_pressed }}</h2>
+                <form action="/select_color" method="POST">
+                    <button type="submit" class="btn btn-primary mt-3">Input</button>
+                </form>
+            </div>
 
         </div>
     </div>

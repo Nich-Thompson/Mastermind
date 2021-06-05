@@ -1,10 +1,12 @@
-from flask import Flask, url_for
+from flask import Flask, url_for, session
 from flask import render_template
 from flask import request, redirect
 
 app = Flask(__name__)
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
-def getNavItems():
+
+def get_nav_items():
     return [
         {"name": "Homepage", "url": url_for('login')},
         {"name": "Statistieken", "url": '/'},
@@ -13,33 +15,39 @@ def getNavItems():
         # {"name": "Over ons", "url": url_for('about_us')},
     ]
 
+
 @app.route('/', methods=["GET", "POST"])
 def login():
     if request.method == "POST":
         req = request.form
-        username = req.get("username")
+        session['username'] = req.get("username")
         return redirect(url_for('settings'))
 
     return render_template(
         "login.html",
-        nav=getNavItems()
+        nav=get_nav_items(),
+        title='Mastermind - Log In',
     )
 
-@app.route('/settings')
+
+@app.route('/settings', methods=["GET", "POST"])
 def settings():
     if request.method == "POST":
         req = request.form
-        double_color = req.get('doubleColor')
-        color_amount = req.get('colorAmount')
-        position_amount = req.get('positionAmount')
+        session['double_color'] = req.get('double_color')
+        session['color_amount'] = req.get('color_amount')
+        session['position_width'] = req.get('position_width')
+        session['position_height'] = req.get('position_height')
         return redirect(url_for('game'))
 
     return render_template(
         "settings.html",
-        nav=getNavItems(),
+        nav=get_nav_items(),
+        title='Mastermind - Settings',
     )
 
-@app.route('/game')
+
+@app.route('/game', methods=["GET", "POST"])
 def game():
     if request.method == "POST":
         req = request.form
@@ -47,8 +55,18 @@ def game():
 
     return render_template(
         'game.html',
-        nav=getNavItems(),
+        nav=get_nav_items(),
+        title='Mastermind - Game',
     )
+
+
+@app.route('/select_color', methods=["GET", "POST"])
+def button():
+    if request.method == "POST":
+        return render_template(
+            'game.html',
+        )
+
 
 if __name__ == '__main__':
     app.run()
