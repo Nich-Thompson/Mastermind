@@ -9,3 +9,7 @@
 .vh-85{
     height: 85vh!important;
 }
+
+.board {
+    background-color: coral;
+}
