@@ -92,7 +92,6 @@ def create_app(test_config=None):
             'game.html',
             nav=get_nav_items(),
             title='Mastermind - Game',
-            position_width=session['position_width'],
         )
 
     @app.route('/select_color', methods=["GET", "POST"])
