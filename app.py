@@ -36,7 +36,8 @@ def settings():
         req = request.form
         session['double_color'] = req.get('double_color')
         session['color_amount'] = req.get('color_amount')
-        session['position_amount'] = req.get('position_amount')
+        session['position_width'] = req.get('position_width')
+        session['position_height'] = req.get('position_height')
         return redirect(url_for('game'))
 
     return render_template(
@@ -57,6 +58,14 @@ def game():
         nav=get_nav_items(),
         title='Mastermind - Game',
     )
+
+
+@app.route('/select_color', methods=["GET", "POST"])
+def button():
+    if request.method == "POST":
+        return render_template(
+            'game.html',
+        )
 
 
 if __name__ == '__main__':
