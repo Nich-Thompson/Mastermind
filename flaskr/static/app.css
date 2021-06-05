@@ -11,9 +11,16 @@
 }
 
 .board {
-    height: 50vh;
+    background-color: SteelBlue;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
     width: 100vw;
-    background-color: LightSkyBlue;
+}
+
+.upper_board {
+    height: 50vh;
+    width: 64vw;
+    background-color: LightSteelBlue;
 }
 
 .board_under {
@@ -23,5 +30,5 @@
 .color_picker, .pin_picker, .submit_area {
     height: 35vh;
     width: 20vw;
-    background-color: LightSkyBlue;
+    background-color: LightSteelBlue;
 }

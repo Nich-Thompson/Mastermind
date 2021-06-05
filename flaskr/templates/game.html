@@ -7,9 +7,8 @@
 {% block content %}
 <div class="container">
     <div class="row mt-4">
-        <div class="col-md-6 ">
-
-            <div class="container p-3 border border-1 rounded mb-4 vertical-center board">
+        <div class="col-md-6 border border-1 rounded board">
+            <div class="container p-3 border border-1 rounded mb-4 vertical-center upper_board">
                 {% for position in range(session.get('position_width') | int) %}
                     a
                 {% endfor %}
