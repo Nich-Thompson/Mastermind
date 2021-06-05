@@ -10,20 +10,21 @@
         <div class="col-md-6 ">
 
             <div class="container p-3 border border-1 rounded mb-4 vertical-center board">
-                0
+                {% for position in range(session.get('position_width') | int) %}
+                    a
+                {% endfor %}
             </div>
             <div class="container row board_under">
                 <div class="container p-3 border border-1 rounded vertical-center color_picker">
                     1
-                    <!--                    <form action="/select_color" method="POST">-->
-                    <!--                        <button type="submit" class="btn btn-primary mt-3">Input</button>-->
-                    <!--                    </form>-->
                 </div>
                 <div class="container p-3 border border-1 rounded vertical-center pin_picker">
                     2
                 </div>
                 <div class="container p-3 border border-1 rounded vertical-center submit_area">
-                    3
+                    <form action="/select_color" method="POST">
+                        <button type="submit" class="btn btn-outline-primary mt-3">Submit code</button>
+                    </form>
                 </div>
             </div>
 

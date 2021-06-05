@@ -78,15 +78,18 @@ def create_app(test_config=None):
         if request.method == "POST":
             req = request.form
             return redirect(url_for(''))
+        print(type(session.get('position_width')))
+        print(session.get('position_width'))
 
         return render_template(
             'game.html',
             nav=get_nav_items(),
             title='Mastermind - Game',
+            position_width=session['position_width'],
         )
 
     @app.route('/select_color', methods=["GET", "POST"])
-    def button():
+    def select_color():
         if request.method == "POST":
             return render_template(
                 'game.html',
