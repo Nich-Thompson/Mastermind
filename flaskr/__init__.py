@@ -4,6 +4,9 @@ from flask import Flask, url_for, session
 from flask import render_template
 from flask import request, redirect
 from flaskr.db import get_db
+from .Game import Game
+from json import JSONEncoder
+from json import JSONDecoder
 
 
 def create_app(test_config=None):
@@ -63,6 +66,10 @@ def create_app(test_config=None):
             session['color_amount'] = req.get('color_amount')
             session['position_width'] = req.get('position_width')
             session['position_height'] = req.get('position_height')
+            session['game'] = JSONEncoder().encode(
+                Game(None, int(req.get('position_width')), int(req.get('position_height')),
+                     int(req.get('color_amount')), bool(req.get('double_color'))))
+            print(JSONDecoder().decode(session['game']).number_of_guesses)
             return redirect(url_for('game'))
 
         return render_template(
@@ -96,7 +103,9 @@ def create_app(test_config=None):
                 nav=get_nav_items(),
                 title='Mastermind - Game',
             )
+
     return app
+
 
 def get_nav_items():
     return [
@@ -106,6 +115,15 @@ def get_nav_items():
         # {"name": "Statistieken", "url": url_for('statistics')},
         # {"name": "Over ons", "url": url_for('about_us')},
     ]
+
+
+class MyEncoder(JSONEncoder):
+    def default(self, o):
+        return o.__dict__
+
+    def from_json(json_object):
+        return Game(json_object['fname'])
+
 
 if __name__ == '__main__':
     app = create_app()
