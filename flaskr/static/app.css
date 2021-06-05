@@ -11,5 +11,18 @@
 }
 
 .board {
-    background-color: coral;
+    height: 50vh;
+    width: 100vw;
+    background-color: LightSkyBlue;
+}
+
+.board_under {
+    width: 100vw;
+
+}
+
+.color_picker, .pin_picker, .submit_area {
+    height: 35vh;
+    width: 20vw;
+    background-color: LightSkyBlue;
 }

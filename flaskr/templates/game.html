@@ -6,28 +6,28 @@
 
 {% block content %}
 <div class="container">
-    <div class="row vh-85 mt-4 vertical-center">
+    <div class="row mt-4">
         <div class="col-md-6 ">
 
-            <div class="container p-3 border border-1 rounded board">
-                <h2>Button pressed: {{ button_pressed }}</h2>
-                <form action="/select_color" method="POST">
-                    <button type="submit" class="btn btn-primary mt-3">Input</button>
-                </form>
+            <div class="container p-3 border border-1 rounded mb-4 vertical-center board">
+                0
             </div>
-            <div class="container">
-                <div class="container p-3 border border-1 rounded">
+            <div class="container row board_under">
+                <div class="container p-3 border border-1 rounded vertical-center color_picker">
                     1
+                    <!--                    <form action="/select_color" method="POST">-->
+                    <!--                        <button type="submit" class="btn btn-primary mt-3">Input</button>-->
+                    <!--                    </form>-->
                 </div>
-                <div class="container p-3 border border-1 rounded">
+                <div class="container p-3 border border-1 rounded vertical-center pin_picker">
                     2
                 </div>
-                <div class="container p-3 border border-1 rounded">
+                <div class="container p-3 border border-1 rounded vertical-center submit_area">
                     3
                 </div>
             </div>
 
         </div>
     </div>
-    </div>
+</div>
 {% endblock %}
