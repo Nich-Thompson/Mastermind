@@ -48,7 +48,7 @@ def create_app(test_config=None):
     def settings():
         if session.get('user') is None:
             return redirect(url_for('login'))
-        if game_controller.status != 'settings':
+        if game_controller.status != 'settings' and game_controller.status != 'won':
             return redirect(url_for('game'))
 
         if request.method == "POST":
@@ -74,8 +74,8 @@ def create_app(test_config=None):
     def won():
         if session.get('user') is None:
             return redirect(url_for('login'))
-        # if game_controller.status != 'won':
-        #     return redirect('game')
+        if game_controller.status != 'won':
+            return redirect('game')
         return game_controller.load_won(session.get('user')['username'])
 
     @app.route('/game/<picked_color>', methods=["GET", "POST"])
