@@ -14,6 +14,9 @@ def get_nav_items():
 
 
 class GameController:
+    def __init__(self):
+        self.game = None
+
     def settings(self):
         return render_template(
             "settings.html",
@@ -39,3 +42,8 @@ class GameController:
             colors=self.game.colors,
             current_color=self.game.current_color
         )
+
+    def place(self, positions):
+        result = self.game.check_positions(positions)
+        if result[0].length == self.game.code.length:
+            print("you've won")
