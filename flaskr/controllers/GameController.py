@@ -34,4 +34,5 @@ class GameController:
             nav=get_nav_items(),
             title='Mastermind - Game',
             position_width=self.game.board.number_of_columns,
+            position_height=self.game.board.number_of_rows,
         )
