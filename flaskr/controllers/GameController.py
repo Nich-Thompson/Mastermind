@@ -29,7 +29,6 @@ class GameController:
         return self.load_game()
 
     def load_game(self):
-        print(self.game.colors)
         return render_template(
             'game.html',
             nav=get_nav_items(),
