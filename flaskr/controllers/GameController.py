@@ -59,5 +59,6 @@ class GameController:
             title='Mastermind - Game',
             username=username,
             number_of_guesses=self.game.number_of_guesses,
-            start_time=self.game.start_time
+            start_time=self.game.start_time,
+            code=self.game.code
         )
