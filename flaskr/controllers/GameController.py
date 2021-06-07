@@ -14,6 +14,9 @@ def get_nav_items():
 
 
 class GameController:
+    def __init__(self):
+        self.game = None
+
     def settings(self):
         return render_template(
             "settings.html",
@@ -36,3 +39,8 @@ class GameController:
             position_width=self.game.board.number_of_columns,
             position_height=self.game.board.number_of_rows,
         )
+
+    def place(self, positions):
+        result = self.game.check_positions(positions)
+        if result[0].length == self.game.code.length:
+            print("you've won")
