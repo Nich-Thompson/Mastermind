@@ -12,7 +12,11 @@
                 {% for x in range((position_width) | int) %}
                 <div class="border border-1 rounded p-1 pin_column">
                     {% for y in range((position_height) | int) %}
+                    {% if squares[y][x] is not none %}
+                    <div class="pin_box {{ squares[y][x] }}" id="{{ x }}-{{ y }} "></div>
+                    {% else %}
                     <div class="pin_box" id="{{ x }}-{{ y }}"></div>
+                    {% endif %}
                     {% endfor %}
                 </div>
                 {% endfor %}
@@ -46,14 +50,15 @@
                     <div class="border border-1 rounded p-1 pin_column">
                         {% for y in range((position_height) | int) %}
                         <div class="vertical-center">
-                            <a role="button" href="{{ url_for('pick_pin', picked_pin = y) }}" class="pin_box {{ current_code_input[y] }}"></a>
+                            <a role="button" href="{{ url_for('pick_pin', picked_pin = y) }}"
+                               class="pin_box {{ current_code_input[y] }}"></a>
                         </div>
                         {% endfor %}
                     </div>
                 </div>
                 <div class="container p-3 border border-1 rounded vertical-center submit_area">
                     <form action="/select_color" method="POST">
-                        <button type="submit" class="btn btn-outline-primary mt-3">Submit code</button>
+                        <a href="/submit" type="submit" class="btn btn-outline-primary mt-3">Submit code</a>
                     </form>
                 </div>
             </div>

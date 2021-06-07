@@ -75,6 +75,11 @@ def create_app(test_config=None):
         game_controller.game.current_code_input[int(picked_pin)] = game_controller.game.current_color
         return game_controller.load_game()
 
+    @app.route('/submit', methods=["GET", "POST"])
+    def submit():
+        game_controller.submit()
+        return game_controller.load_game()
+
     return app
 
 
