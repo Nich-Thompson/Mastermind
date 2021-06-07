@@ -1,5 +1,7 @@
 from datetime import datetime
 import random
+from enum import Enum
+
 from flask import session
 
 
@@ -12,12 +14,24 @@ class Game:
         self.colors = []
         self.code = []
         self.set_colors(number_of_colors)
+        self.current_color = self.colors[0].name
         self.generate_code(number_of_columns, can_use_double_colors)
 
     def set_colors(self, number_of_colors):
-        possible_colors = ['']
+        class Colors(Enum):
+            red = 0
+            orange = 2
+            yellow = 4
+            green = 6
+            blue = 8
+            purple = 1
+            pink = 3
+            brown = 5
+            white = 7
+            black = 9
+
         for i in range(number_of_colors):
-            self.colors.append("#" + ''.join([random.choice('0123456789ABCDEF') for j in range(6)]))
+            self.colors.append(Colors(i))
 
     def generate_code(self, number_of_columns, can_use_double_colors):
         colors = self.colors.copy()
