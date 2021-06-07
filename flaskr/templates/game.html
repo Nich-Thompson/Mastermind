@@ -46,7 +46,7 @@
                     <div class="border border-1 rounded p-1 pin_column">
                         {% for y in range((position_height) | int) %}
                         <div class="vertical-center">
-                            <a role="button" href="{{ url_for('pick_pin', picked_pin = y, foo = y) }}" class="pin_box {{ current_code_input[y] }}"></a>
+                            <a role="button" href="{{ url_for('pick_pin', picked_pin = y) }}" class="pin_box {{ current_code_input[y] }}"></a>
                         </div>
                         {% endfor %}
                     </div>

@@ -65,13 +65,13 @@ def create_app(test_config=None):
 
         return game_controller.load_game()
 
-    @app.route('/game/<picked_color>', methods=["GET", "POST"])
+    @app.route('/color/<picked_color>', methods=["GET", "POST"])
     def pick_color(picked_color):
         game_controller.game.current_color = picked_color
         return game_controller.load_game()
 
-    @app.route('/game/<picked_pin>/<foo>', methods=["GET", "POST"])
-    def pick_pin(picked_pin, foo):
+    @app.route('/pin/<picked_pin>', methods=["GET", "POST"])
+    def pick_pin(picked_pin):
         game_controller.game.current_code_input[int(picked_pin)] = game_controller.game.current_color
         return game_controller.load_game()
 
