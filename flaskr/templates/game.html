@@ -21,12 +21,17 @@
             </div>
             <div class="container row board_under">
                 <div class="container p-3 border border-1 rounded color_picker">
-                    <br><br><br><br>
+                    <br><br>
+                    <div class="row vertical-center">
+                        Current color:&nbsp;
+                        <div class="pin_box {{ current_color.name }}"></div>
+                    </div>
+                    <br><br>
                     <div class="vertical-center">
                         {% for color in colors %}
                         {% if color.value is divisibleby(2) %}
                         <a role="button" href="/game" class="pin_box pin_large {{ color.name }}">
-<!--                            .-->
+                            <!--                            .-->
                         </a>
                         {% endif %}
                         {% endfor %}
@@ -35,7 +40,7 @@
                         {% for color in colors %}
                         {% if color.value is not divisibleby(2) %}
                         <a role="button" href="/game" class="pin_box pin_large {{ color.name }}">
-<!--                            .-->
+                            <!--                            .-->
                         </a>
                         {% endif %}
                         {% endfor %}

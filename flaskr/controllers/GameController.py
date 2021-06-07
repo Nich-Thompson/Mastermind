@@ -37,4 +37,5 @@ class GameController:
             position_width=self.game.board.number_of_columns,
             position_height=self.game.board.number_of_rows,
             colors=self.game.colors,
+            current_color=self.game.current_color
         )
