@@ -16,6 +16,9 @@ class Game:
         self.set_colors(number_of_colors)
         self.current_color = self.colors[0].name
         self.generate_code(number_of_columns, can_use_double_colors)
+        self.current_code_input = {}
+        for i in range(number_of_rows):
+            self.current_code_input[i] = self.colors[0].name
 
     def set_colors(self, number_of_colors):
         class Colors(Enum):

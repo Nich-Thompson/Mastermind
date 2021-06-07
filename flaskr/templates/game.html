@@ -9,12 +9,10 @@
     <div class="row mt-4">
         <div class="col-md-6 border border-1 rounded board">
             <div class="container p-3 border border-1 rounded mb-4 vertical-center upper_board">
-                {% for width in range((position_width) | int) %}
+                {% for x in range((position_width) | int) %}
                 <div class="border border-1 rounded p-1 pin_column">
-                    {% for height in range((position_height) | int) %}
-                    <div class="pin_box" id="{{ width }}-{{ height }}">
-                        .
-                    </div>
+                    {% for y in range((position_height) | int) %}
+                    <div class="pin_box" id="{{ x }}-{{ y }}"></div>
                     {% endfor %}
                 </div>
                 {% endfor %}
@@ -45,7 +43,12 @@
                     </div>
                 </div>
                 <div class="container p-3 border border-1 rounded vertical-center pin_picker">
-                    2
+                    <div class="border border-1 rounded p-1 pin_column">
+                        {% for y in range((position_height) | int) %}
+                        <div class="pin_box {{ current_code_input[y] }}">
+                        </div>
+                        {% endfor %}
+                    </div>
                 </div>
                 <div class="container p-3 border border-1 rounded vertical-center submit_area">
                     <form action="/select_color" method="POST">
