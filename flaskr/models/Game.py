@@ -14,7 +14,7 @@ class Game:
         self.colors = []
         self.code = []
         self.set_colors(number_of_colors)
-        self.current_color = self.colors[0]
+        self.current_color = self.colors[0].name
         self.generate_code(number_of_columns, can_use_double_colors)
 
     def set_colors(self, number_of_colors):

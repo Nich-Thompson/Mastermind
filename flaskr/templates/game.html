@@ -24,24 +24,22 @@
                     <br><br>
                     <div class="row vertical-center">
                         Current color:&nbsp;
-                        <div class="pin_box {{ current_color.name }}"></div>
+                        <div class="pin_box {{ current_color }}"></div>
                     </div>
                     <br><br>
                     <div class="vertical-center">
                         {% for color in colors %}
                         {% if color.value is divisibleby(2) %}
-                        <a role="button" href="/game" class="pin_box pin_large {{ color.name }}">
-                            <!--                            .-->
-                        </a>
+                        <a role="button" href="{{ url_for('pick_color', picked_color = color.name) }}"
+                           class="pin_box pin_large {{ color.name }}"></a>
                         {% endif %}
                         {% endfor %}
                     </div>
                     <div class="vertical-center">
                         {% for color in colors %}
                         {% if color.value is not divisibleby(2) %}
-                        <a role="button" href="/game" class="pin_box pin_large {{ color.name }}">
-                            <!--                            .-->
-                        </a>
+                        <a role="button" href="{{ url_for('pick_color', picked_color = color.name) }}"
+                           class="pin_box pin_large {{ color.name }}"></a>
                         {% endif %}
                         {% endfor %}
                     </div>

@@ -65,6 +65,11 @@ def create_app(test_config=None):
 
         return game_controller.load_game()
 
+    @app.route('/game/<picked_color>', methods=["GET", "POST"])
+    def pick_color(picked_color):
+        game_controller.game.current_color = picked_color
+        return game_controller.load_game()
+
     return app
 
 
