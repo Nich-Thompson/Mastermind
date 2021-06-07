@@ -1,4 +1,5 @@
 from flask import render_template, url_for
+from werkzeug.utils import redirect
 
 from flaskr.models.Game import Game
 
@@ -16,8 +17,10 @@ def get_nav_items():
 class GameController:
     def __init__(self):
         self.game = None
+        self.status = 'settings'
 
     def settings(self):
+        self.status = 'settings'
         return render_template(
             "settings.html",
             nav=get_nav_items(),
@@ -28,11 +31,11 @@ class GameController:
         return self.game
 
     def create_game(self, number_of_columns, number_of_rows, number_of_colors, can_use_double_colors):
+        self.status = 'playing'
         self.game = Game(number_of_columns, number_of_rows, number_of_colors, can_use_double_colors)
         return self.load_game()
 
     def load_game(self):
-        print(self.game.colors)
         return render_template(
             'game.html',
             nav=get_nav_items(),
@@ -46,4 +49,15 @@ class GameController:
     def place(self, positions):
         result = self.game.check_positions(positions)
         if result[0].length == self.game.code.length:
-            print("you've won")
+            self.status = 'won'
+            return redirect(url_for('won'))
+
+    def load_won(self, username):
+        return render_template(
+            'won.html',
+            nav=get_nav_items(),
+            title='Mastermind - Game',
+            username=username,
+            number_of_guesses=self.game.number_of_guesses,
+            start_time=self.game.start_time
+        )

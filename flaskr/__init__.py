@@ -46,8 +46,11 @@ def create_app(test_config=None):
 
     @app.route('/settings', methods=["GET", "POST"])
     def settings():
-        if session.get('user_id') is None:
+        if session.get('user') is None:
             return redirect(url_for('login'))
+        if game_controller.status != 'settings':
+            return redirect(url_for('game'))
+
         if request.method == "POST":
             req = request.form
             return game_controller.create_game(int(req.get('position_width')), int(req.get('position_height')),
@@ -56,14 +59,24 @@ def create_app(test_config=None):
 
     @app.route('/game', methods=["GET", "POST"])
     def game():
-        print(game_controller.get_game().user_id)
-        if session.get('user_id') is None:
+        if session.get('user') is None:
             return redirect(url_for('login'))
+        if game_controller.status != 'playing':
+            return redirect(url_for('settings'))
+
         if request.method == "POST":
             req = request.form
             return redirect(url_for(''))
 
         return game_controller.load_game()
+
+    @app.route('/won', methods=["GET"])
+    def won():
+        if session.get('user') is None:
+            return redirect(url_for('login'))
+        if game_controller.status != 'won':
+            return redirect('game')
+        return game_controller.load_won(session.get('user')['username'])
 
     @app.route('/game/<picked_color>', methods=["GET", "POST"])
     def pick_color(picked_color):

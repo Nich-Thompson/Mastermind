@@ -31,5 +31,8 @@ class LoginController:
         user = db.execute(
             'SELECT * FROM user ORDER BY id DESC lIMIT(1)'
         ).fetchone()
-        session['user_id'] = user['id']
+        session['user'] = {
+            "id": user['id'],
+            "username": user['username']
+        }
         return redirect(url_for('settings'))
