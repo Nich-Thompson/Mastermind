@@ -7,7 +7,7 @@ from flask import session
 
 class Game:
     def __init__(self, number_of_columns, number_of_rows, number_of_colors, can_use_double_colors):
-        self.user_id = session.get('user_id')
+        self.user_id = session.get('user')['id']
         self.board = Board(number_of_columns, number_of_rows)
         self.number_of_guesses = 0
         self.start_time = datetime.now()
