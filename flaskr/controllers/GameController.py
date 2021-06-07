@@ -14,6 +14,9 @@ def get_nav_items():
 
 
 class GameController:
+    def __init__(self):
+        self.game = None
+
     def settings(self):
         return render_template(
             "settings.html",
@@ -47,3 +50,8 @@ class GameController:
             self.game.board.squares[i][num] = self.game.current_code_input[i]
         self.game.number_of_guesses += 1
         # TODO: Loss condition here
+
+    def place(self, positions):
+        result = self.game.check_positions(positions)
+        if result[0].length == self.game.code.length:
+            print("you've won")
