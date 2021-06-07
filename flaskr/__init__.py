@@ -4,8 +4,8 @@ from flask import Flask, url_for, session
 from flask import request, redirect
 
 from flaskr.db import get_db
-from .GameController import GameController
-from .LoginController import LoginController
+from flaskr.controllers.GameController import GameController
+from flaskr.controllers.LoginController import LoginController
 
 login_controller = LoginController()
 game_controller = GameController()

@@ -1,6 +1,6 @@
 from flask import render_template, url_for
 
-from .Game import Game
+from flaskr.models.Game import Game
 
 
 def get_nav_items():
