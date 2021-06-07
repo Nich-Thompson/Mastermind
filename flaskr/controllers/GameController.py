@@ -14,9 +14,6 @@ def get_nav_items():
 
 
 class GameController:
-    def __init__(self):
-        self.game = None
-
     def settings(self):
         return render_template(
             "settings.html",

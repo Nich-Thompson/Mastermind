@@ -15,9 +15,6 @@ def get_nav_items():
 
 
 class LoginController:
-    def __init__(self):
-       print('init')
-
     def index(self):
         return render_template(
             "login.html",
