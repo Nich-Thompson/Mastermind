@@ -44,6 +44,7 @@ class Game:
             self.code.append(color)
             if not can_use_double_colors:
                 colors.remove(color)
+        print(self.code)
 
     def check_positions(self, positions):
         colors_in_code = self.get_colors_in_code()
