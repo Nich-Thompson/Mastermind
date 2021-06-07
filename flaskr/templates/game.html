@@ -10,7 +10,7 @@
         <div class="col-md-6 border border-1 rounded board">
             <div class="container p-3 border border-1 rounded mb-4 vertical-center upper_board">
                 {% for width in range((position_width) | int) %}
-                <div class="border border-1 rounded pin_column">
+                <div class="border border-1 rounded p-1 pin_column">
                     {% for height in range((position_height) | int) %}
                     <div class="pin_box" id="{{ width }}-{{ height }}">
                         .
@@ -25,18 +25,18 @@
                     <div class="vertical-center">
                         {% for color in colors %}
                         {% if color.value is divisibleby(2) %}
-                        <div role="button" class="pin_box pin_large {{ color.name }}">
+                        <a role="button" href="/game" class="pin_box pin_large {{ color.name }}">
 <!--                            .-->
-                        </div>
+                        </a>
                         {% endif %}
                         {% endfor %}
                     </div>
                     <div class="vertical-center">
                         {% for color in colors %}
                         {% if color.value is not divisibleby(2) %}
-                        <div role="button" class="pin_box pin_large {{ color.name }}">
+                        <a role="button" href="/game" class="pin_box pin_large {{ color.name }}">
 <!--                            .-->
-                        </div>
+                        </a>
                         {% endif %}
                         {% endfor %}
                     </div>
