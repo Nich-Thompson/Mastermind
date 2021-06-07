@@ -1,11 +1,12 @@
 from datetime import datetime
 import random
+from flask import session
 
 
 class Game:
-    def __init__(self, user_id, number_of_columns, number_of_rows, number_of_colors, can_use_double_colors):
-        self.user_id = user_id
-        self.board = Board(number_of_columns, number_of_rows, number_of_colors)
+    def __init__(self, number_of_columns, number_of_rows, number_of_colors, can_use_double_colors):
+        self.user_id = session.get('user_id')
+        self.board = Board(number_of_columns, number_of_rows)
         self.number_of_guesses = 0
         self.start_time = datetime.now()
         self.colors = []
@@ -21,7 +22,7 @@ class Game:
     def generate_code(self, number_of_columns, can_use_double_colors):
         colors = self.colors.copy()
         for i in range(number_of_columns):
-            color = colors[random.randint(0, len(colors)-1)]
+            color = colors[random.randint(0, len(colors) - 1)]
             self.code.append(color)
             if not can_use_double_colors:
                 colors.remove(color)
@@ -35,7 +36,9 @@ class Game:
 
 
 class Board:
-    def __init__(self, number_of_columns, number_of_rows, number_of_colors):
+    def __init__(self, number_of_columns, number_of_rows):
+        self.number_of_columns = number_of_columns
+        self.number_of_rows = number_of_rows
         self.squares = []
         new = []
         for i in range(number_of_rows):
@@ -43,7 +46,6 @@ class Board:
                 new.append(None)
             self.squares.append(new)
             new = []
-        self.number_of_colors = number_of_colors
         self.current_row = 0
 
     def get_current_row(self):
