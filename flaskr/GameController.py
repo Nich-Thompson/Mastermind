@@ -16,21 +16,11 @@ def get_nav_items():
 class GameController:
     def __init__(self):
         self.game = None
-        self.nav = None
-
-    def set_nav(self):
-        self.nav = [
-            {"name": "Homepage", "url": url_for('login')},
-            {"name": "Statistieken", "url": '/'},
-            {"name": "Over ons", "url": '/'}
-            # {"name": "Statistieken", "url": url_for('statistics')},
-            # {"name": "Over ons", "url": url_for('about_us')},
-        ]
 
     def settings(self):
         return render_template(
             "settings.html",
-            nav=self.nav,
+            nav=get_nav_items(),
             title='Mastermind - Settings',
         )
 
@@ -44,7 +34,7 @@ class GameController:
     def load_game(self):
         return render_template(
             'game.html',
-            nav=self.nav,
+            nav=get_nav_items(),
             title='Mastermind - Game',
             position_width=self.game.board.number_of_columns,
         )
