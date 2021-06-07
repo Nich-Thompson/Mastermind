@@ -20,8 +20,26 @@
                 {% endfor %}
             </div>
             <div class="container row board_under">
-                <div class="container p-3 border border-1 rounded vertical-center color_picker">
-                    1
+                <div class="container p-3 border border-1 rounded color_picker">
+                    <br><br><br><br>
+                    <div class="vertical-center">
+                        {% for color in colors %}
+                        {% if color.value is divisibleby(2) %}
+                        <div role="button" class="pin_box pin_large {{ color.name }}">
+<!--                            .-->
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="vertical-center">
+                        {% for color in colors %}
+                        {% if color.value is not divisibleby(2) %}
+                        <div role="button" class="pin_box pin_large {{ color.name }}">
+<!--                            .-->
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
                 </div>
                 <div class="container p-3 border border-1 rounded vertical-center pin_picker">
                     2

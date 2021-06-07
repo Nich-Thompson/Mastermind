@@ -44,3 +44,48 @@
     width: 2rem;
     height: 2rem;
 }
+
+.pin_large {
+    width: 3rem;
+    height: 3rem;
+}
+
+.red {
+    background-color: Red;
+}
+
+.orange {
+    background-color: Orange;
+}
+
+.yellow {
+    background-color: Yellow;
+}
+
+.green {
+    background-color: Green;
+}
+
+.blue {
+    background-color: Blue;
+}
+
+.purple {
+    background-color: Purple;
+}
+
+.pink {
+    background-color: Pink;
+}
+
+.brown {
+    background-color: Brown;
+}
+
+.white {
+    background-color: White;
+}
+
+.black {
+    background-color: Black;
+}

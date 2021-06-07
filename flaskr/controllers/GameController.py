@@ -29,10 +29,12 @@ class GameController:
         return self.load_game()
 
     def load_game(self):
+        print(self.game.colors)
         return render_template(
             'game.html',
             nav=get_nav_items(),
             title='Mastermind - Game',
             position_width=self.game.board.number_of_columns,
             position_height=self.game.board.number_of_rows,
+            colors=self.game.colors,
         )
