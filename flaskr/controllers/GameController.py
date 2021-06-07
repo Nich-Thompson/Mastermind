@@ -44,8 +44,17 @@ class GameController:
             position_width=self.game.board.number_of_columns,
             position_height=self.game.board.number_of_rows,
             colors=self.game.colors,
-            current_color=self.game.current_color
+            current_color=self.game.current_color,
+            current_code_input=self.game.current_code_input,
+            squares=self.game.board.squares,
         )
+
+    def submit(self):
+        num = self.game.number_of_guesses
+        for i in range(self.game.height):
+            self.game.board.squares[i][num] = self.game.current_code_input[i]
+        self.game.number_of_guesses += 1
+        # TODO: Loss condition here
 
     def place(self, positions):
         result = self.game.check_positions(positions)

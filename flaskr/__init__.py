@@ -78,9 +78,19 @@ def create_app(test_config=None):
             return redirect('game')
         return game_controller.load_won(session.get('user')['username'])
 
-    @app.route('/game/<picked_color>', methods=["GET", "POST"])
+    @app.route('/color/<picked_color>', methods=["GET", "POST"])
     def pick_color(picked_color):
         game_controller.game.current_color = picked_color
+        return game_controller.load_game()
+
+    @app.route('/pin/<picked_pin>', methods=["GET", "POST"])
+    def pick_pin(picked_pin):
+        game_controller.game.current_code_input[int(picked_pin)] = game_controller.game.current_color
+        return game_controller.load_game()
+
+    @app.route('/submit', methods=["GET", "POST"])
+    def submit():
+        game_controller.submit()
         return game_controller.load_game()
 
     return app
