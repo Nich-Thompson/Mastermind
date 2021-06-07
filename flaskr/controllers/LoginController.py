@@ -24,12 +24,12 @@ class LoginController:
     def login(self, username):
         db = get_db()
         db.execute(
-            'INSERT INTO user (username) VALUES (?)',
+            'INSERT INTO users (username) VALUES (?)',
             (username,)
         )
         db.commit()
         user = db.execute(
-            'SELECT * FROM user ORDER BY id DESC lIMIT(1)'
+            'SELECT * FROM users ORDER BY id DESC lIMIT(1)'
         ).fetchone()
         session['user'] = {
             "id": user['id'],

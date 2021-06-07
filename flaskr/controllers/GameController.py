@@ -1,6 +1,7 @@
-from flask import render_template, url_for
+from flask import render_template, url_for, session
 from werkzeug.utils import redirect
 
+from flaskr import get_db
 from flaskr.models.Game import Game
 
 
@@ -50,9 +51,23 @@ class GameController:
         result = self.game.check_positions(positions)
         if result[0].length == self.game.code.length:
             self.status = 'won'
+            db = get_db()
+            db.execute(
+                'INSERT INTO games (user_id, number_of_guesses, start_time) VALUES (?,?,?)',
+                (self.game.user_id, self.game.number_of_guesses, self.game.start_time.strftime("%d %b, %Y %H:%M:%S"))
+            )
+            db.commit()
             return redirect(url_for('won'))
 
     def load_won(self, username):
+        # db = get_db()
+        # games = db.execute(
+        #     'SELECT * FROM games'
+        # )
+        # for game in games:
+        #     print(game['id'])
+        #     print(game['number_of_guesses'])
+        #     print(game['start_time'])
         return render_template(
             'won.html',
             nav=get_nav_items(),
