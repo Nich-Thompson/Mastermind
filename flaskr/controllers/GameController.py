@@ -49,18 +49,15 @@ class GameController:
         )
 
     def submit(self):
-        for i in range(self.game.height):
-            self.game.board.squares[i][self.game.number_of_guesses] = self.game.current_code_input[i]
+        self.game.board.place(self.game.current_code_input)
         self.game.number_of_guesses += 1
 
         result = self.game.check_positions(self.game.current_code_input)
+        self.game.board.set_feedback(result)
         print(result)
+        print(self.game.board.feedback)
 
-        number_of_positions_correct = 0
-        for correct in result[0]:
-            number_of_positions_correct += result[0][correct]
-
-        if number_of_positions_correct == len(self.game.code):
+        if result['correct'] == len(self.game.code):
             session['status'] = 'won'
             self.save_game()
             return redirect(url_for('won'))

@@ -5,6 +5,13 @@ from enum import Enum
 from flask import session
 
 
+def count_result(result):
+    count = 0
+    for key in result:
+        count += result[key]
+    return count
+
+
 class Game:
     def __init__(self, number_of_columns, number_of_rows, number_of_colors, can_use_double_colors):
         self.user_id = session.get('user')['id']
@@ -85,21 +92,22 @@ class Game:
             diff = 0
             if color in correct.keys():
                 if color in colors_in_code.keys():
-                    diff = correct[color]+right_color[color]-colors_in_code[color]
+                    diff = correct[color] + right_color[color] - colors_in_code[color]
             if diff > 0:
                 right_color[color] -= diff
                 if color in incorrect.keys():
                     incorrect[color] += 1
                 else:
                     incorrect[color] = 1
-                for count in range(diff-1):
+                for count in range(diff - 1):
                     incorrect[color] += 1
                 if right_color[color] == 0:
                     remove_keys.append(color)
 
         for color in remove_keys:
             del right_color[color]
-        return [correct, right_color, incorrect]
+        return {'correct': count_result(correct), 'right_color': count_result(right_color),
+                'incorrect': count_result(incorrect)}
 
     def get_colors_in_code(self):
         colors = {}
@@ -116,6 +124,7 @@ class Board:
         self.number_of_columns = number_of_columns
         self.number_of_rows = number_of_rows
         self.squares = []
+        self.feedback = []
         new = []
         for i in range(number_of_columns):
             for j in range(number_of_rows):
@@ -127,5 +136,10 @@ class Board:
     def get_current_row(self):
         return self.squares[self.current_row]
 
+    def set_feedback(self, feedback):
+        self.feedback.append(feedback)
+
     def place(self, positions):
-        print('place')
+        for i in range(self.number_of_columns):
+            self.squares[i][self.current_row] = positions[i]
+        self.current_row += 1
