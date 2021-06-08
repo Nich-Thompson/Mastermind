@@ -54,8 +54,8 @@ class GameController:
 
         result = self.game.check_positions(self.game.current_code_input)
         self.game.board.set_feedback(result)
-        print(result)
-        print(self.game.board.feedback)
+        print('check result: {}'.format(result))
+        print('feedback list: {}'.format(self.game.board.feedback))
 
         if result['correct'] == len(self.game.code):
             session['status'] = 'won'

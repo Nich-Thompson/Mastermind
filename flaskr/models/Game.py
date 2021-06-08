@@ -61,7 +61,6 @@ class Game:
         incorrect = {}
 
         positions = list(positions.values())
-        print('colors in code: {}'.format(colors_in_code))
         print('guess: {}'.format(positions))
 
         for index in range(len(positions)):
