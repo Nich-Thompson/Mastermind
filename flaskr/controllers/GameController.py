@@ -36,6 +36,14 @@ class GameController:
         return self.load_game()
 
     def load_game(self):
+        print("pins ")
+        for pin in self.game.board.feedback:
+            print(pin)
+        # try:
+        #     gotdata = self.game.board.feedback[1]
+        #     # print(gotdata)
+        # except IndexError:
+        #     gotdata = 'null'
         return render_template(
             'game.html',
             nav=get_nav_items(),
@@ -46,6 +54,7 @@ class GameController:
             current_color=self.game.current_color,
             current_code_input=self.game.current_code_input,
             squares=self.game.board.squares,
+            pins=self.game.board.feedback
         )
 
     def submit(self):
