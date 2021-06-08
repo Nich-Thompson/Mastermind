@@ -18,10 +18,9 @@ def get_nav_items():
 class GameController:
     def __init__(self):
         self.game = None
-        self.status = 'settings'
 
     def settings(self):
-        self.status = 'settings'
+        session['status'] = 'settings'
         return render_template(
             "settings.html",
             nav=get_nav_items(),
@@ -32,7 +31,7 @@ class GameController:
         return self.game
 
     def create_game(self, number_of_columns, number_of_rows, number_of_colors, can_use_double_colors):
-        self.status = 'playing'
+        session['status'] = 'playing'
         self.game = Game(number_of_columns, number_of_rows, number_of_colors, can_use_double_colors)
         return self.load_game()
 
@@ -59,7 +58,7 @@ class GameController:
     def place(self, positions):
         result = self.game.check_positions(positions)
         if result[0].length == self.game.code.length:
-            self.status = 'won'
+            session['status'] = 'won'
             db = get_db()
             db.execute(
                 'INSERT INTO games (user_id, number_of_guesses, start_time) VALUES (?,?,?)',

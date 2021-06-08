@@ -37,7 +37,6 @@ def create_app(test_config=None):
 
     @app.route('/', methods=["GET", "POST"])
     def login():
-        session.clear()
         if request.method == "POST":
             req = request.form
             username = req.get("username")
@@ -48,7 +47,7 @@ def create_app(test_config=None):
     def settings():
         if session.get('user') is None:
             return redirect(url_for('login'))
-        if game_controller.status != 'settings' and game_controller.status != 'won':
+        if session.get('status') != 'settings' and session.get('status') != 'won' and session.get('status') != 'login':
             return redirect(url_for('game'))
 
         if request.method == "POST":
@@ -61,7 +60,7 @@ def create_app(test_config=None):
     def game():
         if session.get('user') is None:
             return redirect(url_for('login'))
-        if game_controller.status != 'playing':
+        if session.get('status') != 'playing':
             return redirect(url_for('settings'))
 
         if request.method == "POST":
@@ -74,7 +73,7 @@ def create_app(test_config=None):
     def won():
         if session.get('user') is None:
             return redirect(url_for('login'))
-        if game_controller.status != 'won':
+        if session.get('status') != 'won':
             return redirect('game')
         return game_controller.load_won(session.get('user')['username'])
 

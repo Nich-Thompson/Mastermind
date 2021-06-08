@@ -16,6 +16,7 @@ def get_nav_items():
 
 class LoginController:
     def index(self):
+        session['status'] = 'login'
         return render_template(
             "login.html",
             nav=get_nav_items()
