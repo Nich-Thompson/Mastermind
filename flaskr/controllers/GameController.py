@@ -49,23 +49,34 @@ class GameController:
         )
 
     def submit(self):
-        num = self.game.number_of_guesses
         for i in range(self.game.height):
-            self.game.board.squares[i][num] = self.game.current_code_input[i]
+            self.game.board.squares[i][self.game.number_of_guesses] = self.game.current_code_input[i]
         self.game.number_of_guesses += 1
-        # TODO: Loss condition here
 
-    def place(self, positions):
-        result = self.game.check_positions(positions)
-        if result[0].length == self.game.code.length:
+        result = self.game.check_positions(self.game.current_code_input)
+        print(result)
+
+        number_of_positions_correct = 0
+        for correct in result[0]:
+            number_of_positions_correct += result[0][correct]
+
+        if number_of_positions_correct == len(self.game.code):
             session['status'] = 'won'
-            db = get_db()
-            db.execute(
-                'INSERT INTO games (user_id, number_of_guesses, start_time) VALUES (?,?,?)',
-                (self.game.user_id, self.game.number_of_guesses, self.game.start_time.strftime("%d %b, %Y %H:%M:%S"))
-            )
-            db.commit()
+            self.save_game()
             return redirect(url_for('won'))
+        elif self.game.number_of_guesses == self.game.losing_condition:
+            session['status'] = 'lose'
+            self.save_game()
+            return redirect(url_for('lose'))
+        return redirect(url_for('game'))
+
+    def save_game(self):
+        db = get_db()
+        db.execute(
+            'INSERT INTO games (user_id, number_of_guesses, start_time) VALUES (?,?,?)',
+            (self.game.user_id, self.game.number_of_guesses, self.game.start_time.strftime("%d %b, %Y %H:%M:%S"))
+        )
+        db.commit()
 
     def load_won(self, username):
         # db = get_db()

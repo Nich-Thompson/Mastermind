@@ -73,6 +73,8 @@ def create_app(test_config=None):
     def won():
         if session.get('user') is None:
             return redirect(url_for('login'))
+        if session.get('status') == 'lose':
+            return redirect('lose')
         if session.get('status') != 'won':
             return redirect('game')
         return game_controller.load_won(session.get('user')['username'])
@@ -89,8 +91,7 @@ def create_app(test_config=None):
 
     @app.route('/submit', methods=["GET", "POST"])
     def submit():
-        game_controller.submit()
-        return game_controller.load_game()
+        return game_controller.submit()
 
     return app
 

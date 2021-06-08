@@ -16,9 +16,10 @@ class Game:
         self.set_colors(number_of_colors)
         self.current_color = self.colors[0].name
         self.generate_code(number_of_columns, can_use_double_colors)
-        self.height = number_of_rows
+        self.height = number_of_columns
+        self.losing_condition = number_of_rows
         self.current_code_input = {}
-        for i in range(number_of_rows):
+        for i in range(number_of_columns):
             self.current_code_input[i] = self.colors[0].name
 
     def set_colors(self, number_of_colors):
@@ -41,16 +42,20 @@ class Game:
         colors = self.colors.copy()
         for i in range(number_of_columns):
             color = colors[random.randint(0, len(colors) - 1)]
-            self.code.append(color)
+            self.code.append(color.name)
             if not can_use_double_colors:
                 colors.remove(color)
-        print(self.code)
+        print('code: {}'.format(self.code))
 
     def check_positions(self, positions):
         colors_in_code = self.get_colors_in_code()
         correct = {}
         right_color = {}
         incorrect = {}
+
+        positions = list(positions.values())
+        print('colors in code: {}'.format(colors_in_code))
+        print('guess: {}'.format(positions))
 
         for index in range(len(positions)):
             if self.code[index] == positions[index]:
@@ -61,7 +66,7 @@ class Game:
             else:
                 check = False
                 for index2 in range(len(self.code)):
-                    if self.code[index2] != positions[index]:
+                    if self.code[index2] == positions[index]:
                         check = True
                         break
                 if check:
@@ -112,8 +117,8 @@ class Board:
         self.number_of_rows = number_of_rows
         self.squares = []
         new = []
-        for i in range(number_of_rows):
-            for j in range(number_of_columns):
+        for i in range(number_of_columns):
+            for j in range(number_of_rows):
                 new.append(None)
             self.squares.append(new)
             new = []
