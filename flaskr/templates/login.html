@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+
+{% block css %}
+<!--  <link href="{{ url_for('static', filename='css/home.css') }}" rel="stylesheet">-->
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row vh-85 mt-4 vertical-center">
+        <div class="col-md-6 p-3 border border-1 rounded">
+
+            <h1>Mastermind</h1>
+            <p>Voer een gebruikersnaam in om te kunnen starten</p>
+            <hr>
+
+            <form action="/" method="POST">
+
+                <div class="form-group">
+                    <label>Gebruikersnaam*</label>
+                    <input type="text" class="form-control mt-3" id="username" name="username"
+                           placeholder="Voer een gebruikersnaam in" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary mt-3">Spel starten</button>
+
+            </form>
+
+        </div>
+    </div>
+    </div>
+{% endblock %}

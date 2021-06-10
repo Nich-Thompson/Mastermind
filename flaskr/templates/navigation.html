@@ -1,0 +1,19 @@
+<header>
+   <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav w-100 d-flex justify-content-center">
+        {% if nav is not none %}
+          {% for link in nav %}
+            <a class="nav-link text-center" href="{{ link.url }}">{{ link.name }}</a>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  </nav>
+</header>

@@ -1,0 +1,17 @@
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS games;
+
+CREATE TABLE users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT NOT NULL
+);
+
+CREATE TABLE games (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    number_of_guesses INTEGER NOT NULL,
+    start_time DATETIME NOT NULL,
+    status TEXT NOT NULL,
+    cheated BOOLEAN NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users (id)
+);

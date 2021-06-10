@@ -1,0 +1,118 @@
+{% extends 'layout.html' %}
+
+{% block css %}
+<!--  <link href="{{ url_for('static', filename='css/home.css') }}" rel="stylesheet">-->
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row mt-4">
+        <div class="col-md-6 border border-1 rounded board">
+            <div class="container p-3 border border-1 rounded mb-4 vertical-center upper_board">
+                {% for x in range((position_height) | int) %}
+                <div>
+                    <div class="border border-1 rounded p-1 pin_column">
+                        {% for y in range((position_width) | int) %}
+                        {% if squares[y][x] is not none %}
+                        <div class="pin_box {{ squares[y][x] }}" id="{{ x }}-{{ y }} "></div>
+                        {% else %}
+                        <div class="pin_box" id="{{ x }}-{{ y }}"></div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="border border-1 rounded p-1 pin_column">
+                        {% if pins|length > x %}
+                        <div>
+                            <div class="pin_box pin_small red">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:{{ pins[x]['correct'] }}
+                            </div>
+                        </div>
+                        <div>
+                            <div class="pin_box pin_small white">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:{{ pins[x]['right_color'] }}
+                            </div>
+                        </div>
+                        {% else %}
+                        <div>
+                            <div class="pin_box pin_small red">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:0
+                            </div>
+                        </div>
+                        <div>
+                            <div class="pin_box pin_small white">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:0
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+
+                {% if cheat_mode %}
+                <div>
+                 <div class="border border-1 rounded p-1 pin_column">
+                     {% for color in secret_code %}
+                        <div class="pin_box {{ color }}"></div>
+                     {% endfor %}
+                </div>
+                 <div class="border border-1 rounded p-1 pin_column h-2-6em">
+                 </div>
+                </div>
+                {% endif %}
+            </div>
+            <div class="container row board_under">
+                <div class="container p-3 border border-1 rounded color_picker">
+                    <br>
+                    <div class="row vertical-center">
+                        Geselecteerde kleur:&nbsp;
+                        <div class="pin_box {{ current_color }}"></div>
+                    </div>
+                    <br><br>
+                    <div class="vertical-center">
+                        {% for color in colors %}
+                        {% if color.value is divisibleby(2) %}
+                        <a role="button" href="{{ url_for('pick_color', picked_color = color.name) }}"
+                           class="pin_box pin_large {{ color.name }}"></a>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="vertical-center">
+                        {% for color in colors %}
+                        {% if color.value is not divisibleby(2) %}
+                        <a role="button" href="{{ url_for('pick_color', picked_color = color.name) }}"
+                           class="pin_box pin_large {{ color.name }}"></a>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="container p-3 border border-1 rounded pin_picker">
+                    <br>
+                    <div class="vertical-center">
+                        Huidige code:
+                    </div>
+                    <br>
+                    {% if (position_width | int) < 5 %}
+                    <br>
+                    {% endif %}
+                    <div class="vertical-center">
+                        <div class="border border-1 rounded p-1 pin_column">
+                            {% for y in range((position_width) | int) %}
+                            <div class="vertical-center">
+                                <a role="button" href="{{ url_for('pick_pin', picked_pin = y) }}"
+                                   class="pin_box {{ current_code_input[y] }}"></a>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="container p-3 border border-1 rounded vertical-center submit_area">
+                    <form action="/select_color" method="POST">
+                        <a href="/submit" type="submit" class="btn btn-outline-primary mt-3">Submit code</a>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

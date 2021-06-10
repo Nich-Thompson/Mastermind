@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+
+{% block css %}
+<!--  <link href="{{ url_for('static', filename='css/home.css') }}" rel="stylesheet">-->
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row vh-85 mt-4 vertical-center">
+        <div class="col-md-6 p-3 border border-1 rounded">
+
+            <h1>Mastermind</h1>
+            <h3>HELAAS {{username}}!!</h3>
+            <p class="mb-5">Jij bent GEEN mastermind :(</p>
+            <p>Je had {{number_of_guesses}} pogingen maar hebt het niet gehaald. . .</p>
+            <p>Je was begonnen om: {{start_time.strftime("%d %b, %Y %H:%M:%S")}}</p>
+             <h2 class="fw-bold">Geheime code</h2>
+            <div class="d-flex justify-content-center">
+                <div class="row d-flex justify-content-between w-75">
+                    {% for color in code %}
+                        <div class="pin_box {{ color }}"></div>
+                    {% endfor %}
+                </div>
+            </div>
+            <a class="btn btn-primary mt-3" href = "/settings">Nieuw spel starten</a>
+        </div>
+    </div>
+    </div>
+{% endblock %}
