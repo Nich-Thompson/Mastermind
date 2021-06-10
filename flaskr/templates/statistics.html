@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+
+{% block css %}
+<!--  <link href="{{ url_for('static', filename='css/home.css') }}" rel="stylesheet">-->
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row vh-85 mt-4 vertical-center">
+        <div class="col-md-6 p-3 border border-1 rounded">
+            <h4>Recente Games voor {{ username }}:</h4>
+            <div>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Speler</th>
+                        <th>Aantal beurten</th>
+                        <th>Datum</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for row in stats %}
+                    <tr>
+                        <td>{{ row[1] }}</td>
+                        <td>{{ row[2] }}</td>
+                        <td>{{ row[3] }}</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

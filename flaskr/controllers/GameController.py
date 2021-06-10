@@ -8,9 +8,8 @@ from flaskr.models.Game import Game
 def get_nav_items():
     return [
         {"name": "Homepage", "url": url_for('login')},
-        {"name": "Statistieken", "url": '/'},
+        {"name": "Statistieken", "url": url_for('players')},
         {"name": "Over ons", "url": '/'}
-        # {"name": "Statistieken", "url": url_for('statistics')},
         # {"name": "Over ons", "url": url_for('about_us')},
     ]
 
@@ -67,7 +66,7 @@ class GameController:
             return redirect(url_for('won'))
         elif self.game.number_of_guesses == self.game.losing_condition:
             session['status'] = 'lose'
-            self.save_game()
+            # self.save_game()
             return redirect(url_for('lose'))
         return redirect(url_for('game'))
 
