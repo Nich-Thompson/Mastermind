@@ -45,11 +45,11 @@ def create_app(test_config=None):
             return login_controller.login(username)
         return login_controller.index()
 
-    @app.route('/players', methods=["GET", "POST"])
+    @app.route('/players', methods=["GET"])
     def players():
         return statistics_controller.get_players()
 
-    @app.route('/statistics/<username>', methods=["GET", "POST"])
+    @app.route('/statistics/<username>', methods=["GET"])
     def statistics(username):
         return statistics_controller.get_statistics(username)
 
@@ -57,9 +57,8 @@ def create_app(test_config=None):
     def settings():
         if session.get('user') is None:
             return redirect(url_for('login'))
-        if session.get('status') != 'settings' and session.get('status') != 'won' and session.get('status') != 'login':
+        if session.get('status') != 'settings' and session.get('status') != 'won' and session.get('status') != 'lose' and session.get('status') != 'login':
             return redirect(url_for('game'))
-
         if request.method == "POST":
             req = request.form
             return game_controller.create_game(int(req.get('position_width')), int(req.get('position_height')),
@@ -88,6 +87,12 @@ def create_app(test_config=None):
         if session.get('status') != 'won':
             return redirect('game')
         return game_controller.load_won(session.get('user')['username'])
+
+    @app.route('/lose', methods=["GET"])
+    def lose():
+        if session.get('user') is None:
+            return redirect(url_for('login'))
+        return game_controller.load_loss(session.get('user')['username'])
 
     @app.route('/color/<picked_color>', methods=["GET", "POST"])
     def pick_color(picked_color):

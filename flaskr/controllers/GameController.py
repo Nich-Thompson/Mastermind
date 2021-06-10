@@ -9,8 +9,6 @@ def get_nav_items():
     return [
         {"name": "Homepage", "url": url_for('login')},
         {"name": "Statistieken", "url": url_for('players')},
-        {"name": "Over ons", "url": '/'}
-        # {"name": "Over ons", "url": url_for('about_us')},
     ]
 
 
@@ -76,18 +74,21 @@ class GameController:
         db.commit()
 
     def load_won(self, username):
-        # db = get_db()
-        # games = db.execute(
-        #     'SELECT * FROM games'
-        # )
-        # for game in games:
-        #     print(game['id'])
-        #     print(game['number_of_guesses'])
-        #     print(game['start_time'])
         return render_template(
             'won.html',
             nav=get_nav_items(),
-            title='Mastermind - Game',
+            title='Mastermind - Gewonnen!',
+            username=username,
+            number_of_guesses=self.game.number_of_guesses,
+            start_time=self.game.start_time,
+            code=self.game.code
+        )
+
+    def load_loss(self, username):
+        return render_template(
+            'loss.html',
+            nav=get_nav_items(),
+            title='Mastermind - Verloren...',
             username=username,
             number_of_guesses=self.game.number_of_guesses,
             start_time=self.game.start_time,

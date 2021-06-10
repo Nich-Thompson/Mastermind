@@ -8,8 +8,6 @@ def get_nav_items():
     return [
         {"name": "Homepage", "url": url_for('login')},
         {"name": "Statistieken", "url": url_for('players')},
-        {"name": "Over ons", "url": '/'}
-        # {"name": "Over ons", "url": url_for('about_us')},
     ]
 
 
