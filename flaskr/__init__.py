@@ -53,7 +53,7 @@ def create_app(test_config=None):
         if request.method == "POST":
             req = request.form
             return game_controller.create_game(int(req.get('position_width')), int(req.get('position_height')),
-                                               int(req.get('color_amount')), bool(req.get('double_color')))
+                                               int(req.get('color_amount')), bool(req.get('double_color')), bool(req.get('cheatmode')))
         return game_controller.settings()
 
     @app.route('/game', methods=["GET", "POST"])

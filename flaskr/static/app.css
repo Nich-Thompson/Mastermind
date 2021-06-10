@@ -10,6 +10,10 @@
     height: 85vh!important;
 }
 
+.h-2-6em{
+    height: 2.6em
+}
+
 .board {
     background-color: SteelBlue;
     padding-top: 0.5rem;

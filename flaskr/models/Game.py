@@ -13,7 +13,7 @@ def count_result(result):
 
 
 class Game:
-    def __init__(self, number_of_columns, number_of_rows, number_of_colors, can_use_double_colors):
+    def __init__(self, number_of_columns, number_of_rows, number_of_colors, can_use_double_colors, cheat_mode):
         self.user_id = session.get('user')['id']
         self.board = Board(number_of_columns, number_of_rows)
         self.number_of_guesses = 0
@@ -26,6 +26,7 @@ class Game:
         self.height = number_of_columns
         self.losing_condition = number_of_rows
         self.current_code_input = {}
+        self.cheat_mode = cheat_mode
         for i in range(number_of_columns):
             self.current_code_input[i] = self.colors[0].name
 
