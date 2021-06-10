@@ -29,12 +29,13 @@ class GameController:
     def get_game(self):
         return self.game
 
-    def create_game(self, number_of_columns, number_of_rows, number_of_colors, can_use_double_colors):
+    def create_game(self, number_of_columns, number_of_rows, number_of_colors, can_use_double_colors, cheat_mode):
         session['status'] = 'playing'
-        self.game = Game(number_of_columns, number_of_rows, number_of_colors, can_use_double_colors)
+        self.game = Game(number_of_columns, number_of_rows, number_of_colors, can_use_double_colors, cheat_mode)
         return self.load_game()
 
     def load_game(self):
+        print(self.game.cheat_mode)
         return render_template(
             'game.html',
             nav=get_nav_items(),
@@ -45,7 +46,9 @@ class GameController:
             current_color=self.game.current_color,
             current_code_input=self.game.current_code_input,
             squares=self.game.board.squares,
-            pins=self.game.board.feedback
+            pins=self.game.board.feedback,
+            cheat_mode=self.game.cheat_mode,
+            secret_code=self.game.code
         )
 
     def submit(self):
