@@ -47,6 +47,18 @@
                     </div>
                 </div>
                 {% endfor %}
+
+                {% if cheat_mode %}
+                <div>
+                 <div class="border border-1 rounded p-1 pin_column">
+                     {% for color in secret_code %}
+                        <div class="pin_box {{ color }}"></div>
+                     {% endfor %}
+                </div>
+                 <div class="border border-1 rounded p-1 pin_column h-2-6em">
+                 </div>
+                </div>
+                {% endif %}
             </div>
             <div class="container row board_under">
                 <div class="container p-3 border border-1 rounded color_picker">
