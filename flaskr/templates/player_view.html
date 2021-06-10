@@ -8,22 +8,18 @@
 <div class="container">
     <div class="row vh-85 mt-4 vertical-center">
         <div class="col-md-6 p-3 border border-1 rounded">
-            <h4>Recente Games voor {{ username }}:</h4>
+            <h4>Spelers:</h4>
             <div>
                 <table class="table">
                     <thead>
                     <tr>
-                        <th>Speler</th>
-                        <th>Aantal beurten</th>
-                        <th>Datum</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
                     {% for row in stats %}
                     <tr>
-                        <td>{{ row[1] }}</td>
-                        <td>{{ row[2] }}</td>
-                        <td>{{ row[3] }}</td>
+                        <td><a class="btn" href="{{ url_for('statistics', username = row[0]) }}">{{ row[0] }}</a></td>
                     </tr>
                     {% endfor %}
                     </tbody>

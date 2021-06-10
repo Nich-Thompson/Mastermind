@@ -45,9 +45,13 @@ def create_app(test_config=None):
             return login_controller.login(username)
         return login_controller.index()
 
-    @app.route('/statistics', methods=["GET", "POST"])
-    def statistics():
-        return statistics_controller.get_statistics()
+    @app.route('/players', methods=["GET", "POST"])
+    def players():
+        return statistics_controller.get_players()
+
+    @app.route('/statistics/<username>', methods=["GET", "POST"])
+    def statistics(username):
+        return statistics_controller.get_statistics(username)
 
     @app.route('/settings', methods=["GET", "POST"])
     def settings():
