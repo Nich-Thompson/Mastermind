@@ -6,9 +6,11 @@ from flask import request, redirect
 from flaskr.db import get_db
 from flaskr.controllers.GameController import GameController
 from flaskr.controllers.LoginController import LoginController
+from flaskr.controllers.StatisticsController import StatisticsController
 
 login_controller = LoginController()
 game_controller = GameController()
+statistics_controller = StatisticsController()
 
 
 def create_app(test_config=None):
@@ -42,6 +44,14 @@ def create_app(test_config=None):
             username = req.get("username")
             return login_controller.login(username)
         return login_controller.index()
+
+    @app.route('/players', methods=["GET", "POST"])
+    def players():
+        return statistics_controller.get_players()
+
+    @app.route('/statistics/<username>', methods=["GET", "POST"])
+    def statistics(username):
+        return statistics_controller.get_statistics(username)
 
     @app.route('/settings', methods=["GET", "POST"])
     def settings():
