@@ -78,7 +78,10 @@
                     <div class="vertical-center">
                         Huidige code:
                     </div>
-                    <br><br>
+                    <br>
+                    {% if (position_width | int) < 5 %}
+                    <br>
+                    {% endif %}
                     <div class="vertical-center">
                         <div class="border border-1 rounded p-1 pin_column">
                             {% for y in range((position_width) | int) %}
