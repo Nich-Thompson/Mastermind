@@ -11,5 +11,7 @@ CREATE TABLE games (
     user_id INTEGER NOT NULL,
     number_of_guesses INTEGER NOT NULL,
     start_time DATETIME NOT NULL,
+    status TEXT NOT NULL,
+    cheated BOOLEAN NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users (id)
 );

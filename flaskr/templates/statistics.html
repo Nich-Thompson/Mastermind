@@ -16,6 +16,8 @@
                         <th>Speler</th>
                         <th>Aantal beurten</th>
                         <th>Datum</th>
+                        <th>Status</th>
+                        <th>gecheat?</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -24,6 +26,8 @@
                         <td>{{ row[1] }}</td>
                         <td>{{ row[2] }}</td>
                         <td>{{ row[3] }}</td>
+                        <td>{{ row[4] }}</td>
+                        <td>{% if row[5] %} Ja {% else %} Nee  {% endif %}</td>
                     </tr>
                     {% endfor %}
                     </tbody>

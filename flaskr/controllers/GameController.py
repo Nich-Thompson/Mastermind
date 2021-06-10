@@ -60,19 +60,19 @@ class GameController:
 
         if result['correct'] == len(self.game.code):
             session['status'] = 'won'
-            self.save_game()
+            self.save_game('Gewonnen')
             return redirect(url_for('won'))
         elif self.game.number_of_guesses == self.game.losing_condition:
             session['status'] = 'lose'
-            # self.save_game()
+            self.save_game('Verloren')
             return redirect(url_for('lose'))
         return redirect(url_for('game'))
 
-    def save_game(self):
+    def save_game(self, status):
         db = get_db()
         db.execute(
-            'INSERT INTO games (user_id, number_of_guesses, start_time) VALUES (?,?,?)',
-            (self.game.user_id, self.game.number_of_guesses, self.game.start_time.strftime("%d %b, %Y %H:%M:%S"))
+            'INSERT INTO games (user_id, number_of_guesses, start_time, status, cheated) VALUES (?,?,?,?,?)',
+            (self.game.user_id, self.game.number_of_guesses, self.game.start_time.strftime("%d %b, %Y %H:%M:%S"), status, self.game.cheat_mode)
         )
         db.commit()
 
